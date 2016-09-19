@@ -13,14 +13,21 @@
 	     $scope.day = dayNames[new Date().getDay()];
 	 });
 
+	 myApp.controller("tomorrowCtrl", function($scope) {
+	     var dayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+	     $scope.day = dayNames[new Date().getDay() + 1];
+	 });
+
+
 	</script>
     </head>
     <body>
-	<div class="panel" ng-controller="dayCtrl">
+	<div class="panel" >
 	    <div class="page-header">
 		<h3>AngularJS app</h3>
 	    </div>
-	    <h4>Today is {{day || "unknown"}}</h4>
+	    <h4 ng-controller="dayCtrl">Today is {{day || "unknown"}}</h4>
+	    <h4 ng-controller="tomorrowCtrl">Tomorrow is {{day || "unknown"}}</h4>
 	</div>
     </body>
 </html>
