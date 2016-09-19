@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="exampleApp">
     <head>
 	<title>AngularJS Introduction</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script>
+
+	 var myApp = angular.module("exampleApp", []);
+
+	 myApp.controller("dayCtrl", function($scope) {
+	     var dayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+	     $scope.day = dayNames[new Date().getDay()];
+	 });
+
+	</script>
     </head>
     <body>
-	<div class="panel">
+	<div class="panel" ng-controller="dayCtrl">
 	    <div class="page-header">
 		<h3>AngularJS app</h3>
 	    </div>
-	    <h4>Today is unknown</h4>
+	    <h4>Today is {{day || "unknown"}}</h4>
 	</div>
     </body>
 </html>
