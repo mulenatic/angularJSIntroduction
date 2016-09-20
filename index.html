@@ -9,13 +9,11 @@
 	 var myApp = angular.module("exampleApp", []);
 
 	 myApp.controller("dayCtrl", function($scope) {
-	     var dayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
-	     $scope.day = dayNames[new Date().getDay()];
+	     $scope.day = new Date().getDay();
 	 });
 
 	 myApp.controller("tomorrowCtrl", function($scope) {
-	     var dayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
-	     $scope.day = dayNames[new Date().getDay() + 1];
+	     $scope.day = new Date().getDay() + 1;
 	 });
 
 	 myApp.directive("highlight", function() {
@@ -26,6 +24,13 @@
 	    }
 	 });
 
+	 myApp.filter("dayName", function() {
+	     var dayNames = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+	     return function(input) {
+		 return angular.isNumber(input) ? dayNames[input] : input;
+	     };
+	 });
+
 
 	</script>
     </head>
@@ -34,8 +39,8 @@
 	    <div class="page-header">
 		<h3>AngularJS app</h3>
 	    </div>
-	    <h4 ng-controller="dayCtrl" highlight="Mittwoch">Today is {{day || "unknown"}}</h4>
-	    <h4 ng-controller="tomorrowCtrl" highlight="Mittwoch">Tomorrow is {{day || "unknown"}}</h4>
+	    <h4 ng-controller="dayCtrl" highlight="Mittwoch">Today is  {{day || "unknown" | dayName}}</h4>
+	    <h4 ng-controller="tomorrowCtrl" highlight="Mittwoch">Tomorrow is  {{day || "unknown" | dayName}}</h4>
 	</div>
     </body>
 </html>
